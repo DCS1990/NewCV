@@ -9,6 +9,7 @@ import { Experience } from '@/components/experience';
 import { Skills } from '@/components/skills';
 import { Projects } from '@/components/projects';
 import { ItamSection } from '@/components/itam-section';
+import { AutomationSection } from '@/components/automation-section';
 import { Certifications } from '@/components/certifications';
 import { PhpProjectHub } from '@/components/php-project-hub';
 import { Contact } from '@/components/contact';
@@ -20,36 +21,42 @@ export default function HomePage() {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200">
+      <div className="min-h-screen site-blueprint-grid text-slate-900 dark:text-slate-100 transition-colors duration-200 selection:bg-blue-100 selection:text-blue-900 dark:selection:bg-blue-900 dark:selection:text-white">
+        
         {/* Navigation Bar */}
         <Navbar onOpenCvModal={() => setCvModalOpen(true)} />
 
-        {/* Hero Section */}
-        <Hero onOpenCvModal={() => setCvModalOpen(true)} />
+        <main>
+          {/* Hero Section */}
+          <Hero onOpenCvModal={() => setCvModalOpen(true)} />
 
-        {/* Core Competencies (11 Pillars) */}
-        <About />
+          {/* 01. Professional Profile / About */}
+          <About />
 
-        {/* Career Experience Timeline */}
-        <Experience />
+          {/* 02. Career Timeline / Experience */}
+          <Experience />
 
-        {/* Technical Skills Matrix */}
-        <Skills />
+          {/* 03. Technical Capabilities / Skills */}
+          <Skills />
 
-        {/* Applied Engineering Projects */}
-        <Projects />
+          {/* 04. Featured Projects / Applied Solutions */}
+          <Projects />
 
-        {/* Dedicated IT Asset Management (ITAM) Section */}
-        <ItamSection />
+          {/* 05. Core Domain Specialization / ITAM */}
+          <ItamSection />
 
-        {/* Academic & Professional Certifications */}
-        <Certifications />
+          {/* 06. Automation & Process Engineering */}
+          <AutomationSection />
 
-        {/* Dedicated Standalone PHP Project Hub & Exporter */}
-        <PhpProjectHub />
+          {/* 07. Academic & Professional Growth / Education & Certifications */}
+          <Certifications />
 
-        {/* Contact Section */}
-        <Contact />
+          {/* Standalone Enterprise PHP Project Hub */}
+          <PhpProjectHub />
+
+          {/* 08. Curriculum Vitae & Get in Touch / Contact */}
+          <Contact onOpenCvModal={() => setCvModalOpen(true)} />
+        </main>
 
         {/* Global Footer */}
         <Footer />

@@ -1,8 +1,10 @@
 export interface PersonalInfo {
   name: string;
   roleTitle: string;
+  credentialsSubtitle: string;
   tagline: string;
   summary: string;
+  heroBio: string;
   email: string;
   phone: string;
   whatsapp: string;
@@ -10,10 +12,8 @@ export interface PersonalInfo {
   location: string;
   linkedin: string;
   github: string;
-  yearsExperience: number;
-  endpointsManaged: string;
-  slaAdherence: string;
-  enterprisesSupported: string;
+  heroChecks: string[];
+  kpis: { number: string; title: string; subtitle: string }[];
 }
 
 export interface FocusArea {
@@ -21,64 +21,77 @@ export interface FocusArea {
   title: string;
   description: string;
   iconName: string;
-  metrics: string;
 }
 
 export interface ExperienceItem {
   id: string;
-  company: string;
-  legalEntity?: string;
-  role: string;
   period: string;
+  role: string;
+  company: string;
   location: string;
   isCurrent?: boolean;
-  companyDescription: string;
+  legalEntity?: string;
   responsibilities: string[];
   technologies: string[];
 }
 
 export interface SkillCategory {
+  id: string;
   category: string;
-  iconName: string;
-  skills: { name: string; level: string; experienceYears?: string; note?: string }[];
+  subtitle: string;
+  skills: string[];
+  competencyCount: number;
 }
 
 export interface ProjectItem {
   id: string;
   title: string;
-  category: 'Enterprise Systems' | 'Audit & ITAM' | 'Service Operations' | 'Automation & Tools';
+  badge: 'Asset Management' | 'Automation & Tools' | 'Web Applications';
+  status: 'In Production' | 'Completed';
+  subLabel: string;
   description: string;
-  problemSolved: string;
-  architecture: string;
+  operationalValue: string;
   technologies: string[];
-  features: string[];
-  status: 'In Production' | 'Implemented' | 'Enterprise Asset';
   githubUrl: string;
   hasPhpSource?: boolean;
 }
 
-export interface CertificationItem {
+export interface ItamSpecialization {
   id: string;
   title: string;
-  issuer: string;
-  year?: string;
-  credentialId?: string;
-  badgeType: 'Degree' | 'Certification' | 'Diploma' | 'Trade Certificate';
   description: string;
+  iconName: string;
+  tasks: string[];
 }
 
-export interface ItamPillar {
-  number: string;
+export interface AutomationSolution {
+  id: string;
   title: string;
+  category: string;
+  iconName: string;
+  problem: string;
+  solution: string;
+  impact: string;
+  technologies: string[];
+  statusBadge: string;
+}
+
+export interface EducationCertificationItem {
+  id: string;
+  title: string;
+  year: string;
+  type: 'Degree' | 'Certification' | 'Diploma' | 'School';
+  institution: string;
   description: string;
-  activities: string[];
 }
 
 export const personalInfo: PersonalInfo = {
   name: "Chaminda Sampath",
   roleTitle: "IT Support Specialist | Infrastructure | IT Operations | Asset Management",
-  tagline: "13+ Years Delivering Resilient Enterprise ICT Operations, ITAM Governance & Workflow Automation",
-  summary: "Results-driven IT professional with over 13 years of enterprise experience across high-velocity manufacturing environments (MAS Capital, Brandix). Demonstrated excellence in IT infrastructure reliability, L1/L2 end-user desktop engineering, Cisco networking, Microsoft Intune endpoint governance, comprehensive IT Asset Management (ITAM), and practical operations automation using Python, PowerShell, and PHP.",
+  credentialsSubtitle: "ICT Administrator, B.BM | Over 13 Years Enterprise IT Experience",
+  tagline: "Bridging hands-on industrial IT infrastructure reliability with modern asset governance, team leadership, and targeted automation engineering.",
+  summary: "With over 13 years of enterprise ICT administration and support experience across Sri Lanka and the UAE, I have managed high-availability IT infrastructures in demanding apparel manufacturing environments including Brandix Apparel Solutions and MAS Holdings.",
+  heroBio: "I specialize in IT infrastructure support, site operations, asset management, network support, troubleshooting, and technology solutions. I also develop practical applications and automation tools to improve IT operations and business processes.",
   email: "chaminda.d.sampath@gmail.com",
   phone: "+94 75 560 6269",
   whatsapp: "+94 77 649 6163",
@@ -86,263 +99,280 @@ export const personalInfo: PersonalInfo = {
   location: "Balangoda, Sri Lanka",
   linkedin: "https://www.linkedin.com/in/chaminda-sampath-7aab40104/",
   github: "https://github.com/DCS1990",
-  yearsExperience: 13,
-  endpointsManaged: "1,200+",
-  slaAdherence: "99.8%",
-  enterprisesSupported: "MAS & Brandix",
+  heroChecks: [
+    "13+ Years Enterprise IT Operations",
+    "End-to-End IT Asset Management (ITAM)",
+    "Microsoft Intune & Device Governance",
+    "Automation with Python, React & PowerShell",
+  ],
+  kpis: [
+    {
+      number: "13+",
+      title: "Years in Enterprise IT",
+      subtitle: "Administering production networks & servers since 2012",
+    },
+    {
+      number: "2",
+      title: "Apparel Conglomerates",
+      subtitle: "Proven track record at Brandix Group & MAS Holdings",
+    },
+    {
+      number: "6",
+      title: "Technicians Led",
+      subtitle: "Mentored site support teams delivering L1/L2 SLA resolution",
+    },
+    {
+      number: "3",
+      title: "Sites Managed",
+      subtitle: "Simultaneous multi-site ICT governance & inventory control",
+    },
+  ],
 };
 
-export const focusAreas: FocusArea[] = [
+export const aboutNarratives = [
+  "With over 13 years of enterprise ICT administration and support experience across Sri Lanka and the UAE, I have managed high-availability IT infrastructures in demanding apparel manufacturing environments including Brandix Apparel Solutions and MAS Holdings.",
+  "My hands-on expertise spans core infrastructure—from Windows Server 2016, Active Directory, and Cisco networks to VMware virtualization, backup strategies, and Microsoft Intune / Entra ID device governance.",
+  "Beyond day-to-day L1/L2 support and managing a team of six IT technicians, I specialize in end-to-end IT Asset Management (ITAM): physical audits, offline asset reconciliation, aging analysis, vendor coordination, and compliant disposal.",
+  "To solve recurring operational bottlenecks, I leverage software development and scripting (Python, TypeScript, React, Next.js, PowerShell, and Google Apps Script) to deliver custom asset dashboards, automated reconciliation systems, and internal workflow tools.",
+];
+
+export const executiveSummaryDetails = [
+  { label: "Current Role", value: "IT Support Specialist (L1) – MAS Capital (Pvt) Ltd" },
+  { label: "Experience", value: "Over 13 years in factory & enterprise ICT (since 2012)" },
+  { label: "Education", value: "Bachelor of Business Management (B.BM), Univ. of Kelaniya" },
+  { label: "Core Specialization", value: "ITAM, Infrastructure Support, Network Diagnostics & Automation" },
+  { label: "Base", value: "Balangoda, Sri Lanka (Worked in Sri Lanka & Dubai)" },
+];
+
+export const coreOperationalFocusAreas: FocusArea[] = [
   {
-    id: "infrastructure",
-    title: "IT Infrastructure Support & Administration",
-    description: "Multi-rack server room operations, UPS power integrity, structured fiber/copper distribution, and continuous plant floor availability.",
+    id: "infra",
+    title: "IT Infrastructure Support",
+    description: "Windows Server 2016, Active Directory, DNS/DHCP, VMware virtualization, NAS storage, and automated scheduled backups for 99.9% site uptime.",
     iconName: "Server",
-    metrics: "24/7 Plant Uptime",
   },
   {
-    id: "desktop-support",
-    title: "Executive & End-User Technical Support (L1/L2)",
-    description: "Rapid incident response, hardware imaging, software provisioning, and VIP executive computing assistance adhering to strict SLAs.",
-    iconName: "Headphones",
-    metrics: "1,200+ Users",
+    id: "helpdesk",
+    title: "End-User & Help Desk Support",
+    description: "Level 1 and Level 2 diagnostic resolution, workstation imaging, onboarding, peripheral setup, and leading a 6-technician site support team.",
+    iconName: "Users",
   },
   {
-    id: "networking",
-    title: "Network Diagnostics & LAN/WAN Operations",
-    description: "Cisco managed switches, VLAN segmentation, industrial Wi-Fi access points, firewall rules, and low-latency line connectivity.",
+    id: "network",
+    title: "Network & Connectivity",
+    description: "LAN/WAN diagnostics, switch/router troubleshooting, VLAN tagging, WiFi access point deployments, and coordinating with enterprise network engineering.",
     iconName: "Network",
-    metrics: "Multi-VLAN Segregation",
   },
   {
     id: "hardware",
-    title: "Hardware Component Repair & RMA Lifecycles",
-    description: "Component-level motherboard diagnostics, barcode & thermal printer service, POS terminals, and third-party vendor warranty management.",
+    title: "Hardware & Software Support",
+    description: "Comprehensive maintenance of PCs, thermal barcode printers, industrial factory terminals, OS upgrades, and patch deployment through SCCM.",
     iconName: "Wrench",
-    metrics: "35% Failure Reduction",
   },
   {
     id: "itam",
-    title: "Comprehensive IT Asset Management (ITAM)",
-    description: "End-to-end asset tracking from procurement, barcode tagging, physical reconciliation, license accounting to secure decommissioning.",
+    title: "IT Asset Management (ITAM)",
+    description: "Tracking hardware lifecycles from procurement tagging and custodian assignment to depreciation analysis, warranty tracking, and secure disposal.",
     iconName: "Boxes",
-    metrics: "100% Audit Compliance",
   },
   {
     id: "intune",
-    title: "Microsoft Intune & Endpoint Management",
-    description: "Cloud-native device enrollment, Windows Autopilot configuration, BitLocker enforcement, compliance policies, and app deployment.",
-    iconName: "ShieldCheck",
-    metrics: "Zero-Touch Deployment",
+    title: "Microsoft Intune & MDM",
+    description: "Enforcing endpoint security policies, Windows Autopilot provisioning, compliance baselines, remote wiping, and Entra ID (Azure AD) sync.",
+    iconName: "Smartphone",
+  },
+  {
+    id: "reliability",
+    title: "IT Operations & Reliability",
+    description: "Running proactive site health monitoring, disaster recovery protocols, standard operating procedure documentation, and shift handovers.",
+    iconName: "Activity",
+  },
+  {
+    id: "vendor",
+    title: "Vendor & Repair Coordination",
+    description: "Managing external warranty claims, repair quotation assessments, loaner hardware rotation, procurement verification, and supplier SLAs.",
+    iconName: "Truck",
+  },
+  {
+    id: "audits",
+    title: "IT Audits & Asset Reconciliation",
+    description: "Performing physical floor serial audits, investigating inactive/offline devices, aligning physical counts with digital records, and passing compliance audits.",
+    iconName: "FileCheck",
   },
   {
     id: "process",
-    title: "Process Standardization & SLA Governance",
-    description: "Implementation of ITIL V3 service principles, ticketing workflow hygiene, root-cause analysis (RCA), and vendor SLA enforcement.",
-    iconName: "FileCheck2",
-    metrics: "99.8% SLA Adherence",
+    title: "Process Improvement",
+    description: "Eliminating procedural redundancies, digitizing paper approvals, and standardizing site ICT request flows to accelerate ticket resolution.",
+    iconName: "Zap",
   },
   {
     id: "automation",
-    title: "Operational Automation & Scripting",
-    description: "Tailored Python, PowerShell, and Bash tools that eliminate repetitive administrative burdens, verify backups, and ping critical endpoints.",
-    iconName: "Terminal",
-    metrics: "15+ Hours Saved/Wk",
-  },
-  {
-    id: "active-directory",
-    title: "Active Directory, Entra ID & Access Control",
-    description: "User onboarding/offboarding, Group Policy Objects (GPOs), RBAC delegation, hybrid directory synchronization, and MFA compliance.",
-    iconName: "Users",
-    metrics: "Automated Provisioning",
-  },
-  {
-    id: "dr-backup",
-    title: "Disaster Recovery & Backup Verification",
-    description: "Automated NAS/SAN snapshot verification, offsite replication monitoring, database backup integrity testing, and bare-metal recovery drills.",
-    iconName: "DatabaseBackup",
-    metrics: "Daily Checksum Audits",
-  },
-  {
-    id: "procurement",
-    title: "Vendor Liaison & Tech Procurement",
-    description: "Technical hardware evaluations, RFP quote comparisons, spare part inventory control, and warranty service level coordination.",
-    iconName: "Truck",
-    metrics: "Optimal TCO & Spares",
+    title: "Automation & App Development",
+    description: "Engineering practical tools using Python, React, Next.js, PowerShell, and Google Apps Script to automate asset reporting and site operations.",
+    iconName: "Code2",
   },
 ];
 
 export const experienceList: ExperienceItem[] = [
   {
-    id: "mas-active",
-    company: "MAS Capital (Pvt) Ltd / MAS ACTIVE (PRIVATE) LIMITED",
-    legalEntity: "MAS Holdings – MAS Active Division",
-    role: "IT Support Specialist – Infrastructure & Operations",
-    period: "January 2023 – Present",
-    location: "Sri Lanka",
+    id: "mas-capital",
+    period: "1 July 2026 – Present",
     isCurrent: true,
-    companyDescription: "MAS Holdings is South Asia's largest apparel tech manufacturer and innovator, employing over 100,000 people globally.",
+    role: "IT Support Specialist (L1)",
+    company: "MAS Capital (Pvt) Ltd",
+    location: "Colombo / Sri Lanka",
     responsibilities: [
-      "Orchestrate day-to-day enterprise ICT operations, infrastructure health, and L1/L2 incident resolution across plant business units.",
-      "Administer Microsoft Intune (Endpoint Manager) for automated Windows Autopilot laptop rollouts, BitLocker encryption escrow, and baseline compliance.",
-      "Lead plant-wide IT Asset Management (ITAM): physical barcode audits, depreciation registries, Microsoft 365 licensing reconciliation, and compliant disposal.",
-      "Supervise Cisco network infrastructure comprising 24/48-port PoE switches, industrial wireless APs, fiber backbones, and plant CCTV networks.",
-      "Develop custom operational automation scripts in PowerShell and Python to verify critical printer availability and dispatch automated alerts.",
-      "Act as primary technical liaison for vendor warranty repairs (RMA), ensuring replacement equipment complies with strict enterprise security baselines.",
+      "Oversee enterprise L1/L2 incident resolution across corporate head offices and apparel business units.",
+      "Administer Microsoft Intune, Windows Autopilot provisioning, and BitLocker device security baselines.",
+      "Maintain active directory user accounts, security groups, M365 license assignments, and access delegation.",
+      "Track corporate IT assets, monitor loaner device inventory, and coordinate RMA hardware warranty service.",
     ],
-    technologies: [
-      "Microsoft Intune",
-      "Windows Server 2022",
-      "Active Directory",
-      "Cisco Catalyst",
-      "PowerShell",
-      "Python",
-      "ITAM / Barcoding",
-      "Office 365",
+    technologies: ["Microsoft Intune", "Windows Server", "Active Directory", "M365", "ITAM"],
+  },
+  {
+    id: "mas-kreeda",
+    period: "January 2023 – June 2026",
+    role: "IT Site Support Administrator (L1)",
+    company: "MAS Kreeda – Balangoda (Outsourced)",
+    location: "Balangoda, Sri Lanka",
+    responsibilities: [
+      "Directed complete on-site ICT operations supporting 1,200+ factory floor users, line terminals, and office workstations.",
+      "Led a dedicated site support team of 6 IT technicians delivering SLA compliance above 99.8%.",
+      "Conducted quarterly physical IT asset audits, floor reconciliations, and barcoded lifecycle management.",
+      "Supervised Cisco edge switches, industrial Wi-Fi access points, fiber backbones, and server room UPS power.",
+      "Engineered automated PowerShell and Python scripts to monitor offline thermal printers and ping mission-critical endpoints.",
     ],
+    technologies: ["Cisco Catalyst", "VMware", "PowerShell", "Python", "Barcode Systems", "SCCM"],
   },
   {
     id: "brandix-essentials",
-    company: "Brandix Apparel Solutions Ltd – Essentials",
-    legalEntity: "Brandix Group – Essentials Business Unit",
-    role: "Executive – IT Operations & Support",
     period: "March 2022 – 2023",
+    role: "ICT Administrator",
+    company: "Brandix Apparel Solutions Ltd – Essentials",
     location: "Sri Lanka",
-    isCurrent: false,
-    companyDescription: "Brandix is a benchmark apparel solutions provider operating across Sri Lanka, India, and Bangladesh.",
     responsibilities: [
-      "Managed plant-level IT operations, ensuring 99.8% uptime for time-critical production line terminals and cutting/packing IT stations.",
-      "Established the facility's centralized IT Asset Management framework, tracking serial numbers, warranty terms, and physical floor allocations.",
-      "Conducted quarterly physical inventory reconciliations against Active Directory domain logs, achieving 100% audit alignment.",
-      "Administered Windows Domain Controllers, DHCP scope reservations, file server access permissions, and automated endpoint antivirus definitions.",
-      "Mentored junior support technicians on standard troubleshooting protocols, incident escalation paths, and ticket SLA reporting.",
+      "Administered high-availability manufacturing plant network infrastructure, Active Directory GPOs, and core file servers.",
+      "Spearheaded plant floor IT asset tracking, software licensing audits, and decommissioned obsolete equipment.",
+      "Delivered L1/L2 desktop support, thermal barcode label printer troubleshooting, and factory tablet provisioning.",
+      "Collaborated with corporate IT engineering on fiber link expansions and disaster recovery backup tests.",
     ],
-    technologies: [
-      "Active Directory",
-      "Windows Server",
-      "ITIL V3 Practices",
-      "Cisco Networking",
-      "Hardware Diagnostics",
-      "Asset Auditing",
-    ],
+    technologies: ["Windows Server 2016", "Active Directory", "Hyper-V", "Zebra Printers", "Backup Exec"],
   },
   {
     id: "dream-curious",
-    company: "Dream Curious International Pvt Ltd",
-    legalEntity: "Dream Curious International (Dubai, UAE)",
-    role: "IT Support & System Administrator",
     period: "December 2021 – March 2022",
-    location: "Dubai, UAE (Offshore Support)",
-    isCurrent: false,
-    companyDescription: "International commerce and technology consulting firm managing distributed teams across UAE and Asia.",
+    role: "ICT Executive",
+    company: "Dream Curious International Pvt Ltd",
+    location: "Dubai, United Arab Emirates",
     responsibilities: [
-      "Delivered remote technical infrastructure support, secure VPN tunnel management, and identity access control for remote workforce.",
-      "Configured cloud mailboxes, file collaboration repositories, and endpoint security agents across Windows and macOS clients.",
-      "Automated daily cloud backup verification scripts and generated weekly uptime and security health scorecards.",
+      "Provided executive desktop engineering, cloud collaboration administration, and secure remote VPN support in Dubai.",
+      "Configured Office 365, SharePoint team sites, cloud identity management, and hardware procurement.",
+      "Maintained network switches, biometric access control terminals, and VoIP telephony systems.",
     ],
-    technologies: [
-      "Cloud Infrastructure",
-      "Remote Administration",
-      "VPN / Security",
-      "Windows / macOS",
-      "Scripting",
-    ],
+    technologies: ["Office 365", "SharePoint", "VoIP", "Network Security", "Azure AD"],
   },
   {
     id: "brandix-casualwear",
-    company: "Brandix Apparel Solutions Ltd – Casualwear",
-    legalEntity: "Brandix Group – Casualwear Division",
-    role: "Senior IT Support Associate / Infrastructure Technician",
     period: "December 2012 – November 2021",
-    location: "Sri Lanka",
-    isCurrent: false,
-    companyDescription: "9-year distinguished tenure managing large manufacturing facility ICT operations and high-volume hardware fleets.",
+    role: "ICT Administrator",
+    company: "Brandix Apparel Solutions Ltd – Casualwear",
+    location: "Awissawella, Ratmalana & Nivithigala, Sri Lanka",
     responsibilities: [
-      "Provided frontline infrastructure and hardware support across 800+ user endpoints, industrial barcode printers (Zebra/Datamax), and production PCs.",
-      "Designed and implemented the facility's preventive hardware maintenance program, decreasing unscheduled equipment breakdown by 35%.",
-      "Executed physical structured cabling projects (Cat6 copper, patch panel termination, fiber distribution, and comms rack dressing).",
-      "Handled component-level repairs of power supplies, motherboards, display panels, and thermal printheads, substantially curbing replacement costs.",
-      "Participated actively in multiple ISO 27001, ITIL, and internal corporate compliance audits with zero major non-conformities.",
+      "Delivered 9 continuous years of multi-site IT administration across 3 major Brandix manufacturing plants.",
+      "Managed server room operations, Windows Server 2008/2012/2016 domain controllers, DHCP/DNS, and NAS storage.",
+      "Performed full-scope IT asset lifecycle tracking for over 1,500 endpoint devices, printers, and network appliances.",
+      "Designed and deployed custom internal PHP & MySQL web portals for shift attendance and internal inventory logs.",
+      "Supported industrial production machinery interfaces, CAD/CAM workstations, and barcode fabric cutting systems.",
     ],
-    technologies: [
-      "Structured Cabling",
-      "Cisco Switches",
-      "Component Repair",
-      "Industrial Printers",
-      "Hardware RMA",
-      "Preventive Care",
-      "LAN Administration",
-    ],
+    technologies: ["Windows Server", "Cisco LAN/WAN", "PHP", "MySQL", "Thermal Printers", "ITAM"],
   },
 ];
 
 export const skillCategories: SkillCategory[] = [
   {
-    category: "IT Infrastructure & Networking",
-    iconName: "Network",
+    id: "infra",
+    category: "IT Infrastructure",
+    subtitle: "Core systems, networking, hardware, and physical site operational reliability",
+    competencyCount: 9,
     skills: [
-      { name: "LAN / WAN Architecture", level: "Expert", experienceYears: "13 yrs" },
-      { name: "Cisco Switching & Routing", level: "Advanced", experienceYears: "10+ yrs" },
-      { name: "VLANs & Traffic Segregation", level: "Advanced", experienceYears: "9+ yrs" },
-      { name: "Wi-Fi 6 Enterprise APs", level: "Advanced", experienceYears: "8+ yrs" },
-      { name: "Fiber & Structured Cabling (Cat6)", level: "Expert", experienceYears: "13 yrs" },
-      { name: "DHCP, DNS, Subnetting & IPAM", level: "Expert", experienceYears: "13 yrs" },
-      { name: "Network Troubleshooting & Wireshark", level: "Advanced", experienceYears: "8+ yrs" },
-      { name: "UPS & Server Room Environmentals", level: "Expert", experienceYears: "13 yrs" },
+      "IT Support (L1 & L2)",
+      "Infrastructure Support",
+      "Network Troubleshooting",
+      "Hardware Diagnostics & Repair",
+      "Printer & Peripheral Support",
+      "Windows Support & Optimization",
+      "End User Support & Training",
+      "VMware Workstation",
+      "Cisco Networking Fundamentals",
     ],
   },
   {
-    category: "IT Asset Management (ITAM)",
-    iconName: "Boxes",
+    id: "asset",
+    category: "Asset Management",
+    subtitle: "End-to-end ITAM, auditing, compliance, aging analysis, and lifecycle tracking",
+    competencyCount: 8,
     skills: [
-      { name: "Asset Lifecycle Management", level: "Expert", experienceYears: "11+ yrs" },
-      { name: "Physical Audit & Verification", level: "Expert", experienceYears: "11+ yrs" },
-      { name: "Barcode & Asset Tagging", level: "Expert", experienceYears: "10+ yrs" },
-      { name: "Intune / AD Asset Reconciliation", level: "Advanced", experienceYears: "6+ yrs" },
-      { name: "Software License Compliance", level: "Advanced", experienceYears: "7+ yrs" },
-      { name: "Hardware Warranty & RMA Tracking", level: "Expert", experienceYears: "12+ yrs" },
-      { name: "Secure Decommissioning & Wiping", level: "Expert", experienceYears: "10+ yrs" },
-      { name: "ITAM Inventory Reporting", level: "Expert", experienceYears: "11+ yrs" },
+      "IT Asset Management (ITAM)",
+      "Physical Asset Auditing",
+      "Offline Asset Reconciliation",
+      "Hardware Lifecycle Management",
+      "Software Asset & License Tracking",
+      "Vendor & Repair Management",
+      "Asset Aging & Depreciation Analysis",
+      "IT Disposal & E-Waste Process",
     ],
   },
   {
-    category: "Enterprise Systems & Microsoft",
-    iconName: "ShieldCheck",
+    id: "microsoft",
+    category: "Microsoft / Enterprise",
+    subtitle: "Modern workplace management, directory services, and enterprise security",
+    competencyCount: 9,
     skills: [
-      { name: "Microsoft Intune (MDM / MAM)", level: "Advanced", experienceYears: "5+ yrs" },
-      { name: "Windows Autopilot Deployment", level: "Advanced", experienceYears: "4+ yrs" },
-      { name: "Active Directory & GPOs", level: "Expert", experienceYears: "12+ yrs" },
-      { name: "Microsoft 365 Administration", level: "Advanced", experienceYears: "7+ yrs" },
-      { name: "Windows Server (2016 - 2022)", level: "Advanced", experienceYears: "10+ yrs" },
-      { name: "BitLocker & Endpoint Security", level: "Advanced", experienceYears: "6+ yrs" },
-      { name: "Linux Administration (Ubuntu/CentOS)", level: "Intermediate", experienceYears: "5+ yrs" },
-      { name: "ITIL V3 Service Management", level: "Certified", experienceYears: "8+ yrs" },
+      "Microsoft Intune",
+      "Windows Server 2016",
+      "Microsoft 365 Administration",
+      "Microsoft Entra ID (Azure AD)",
+      "Device Management & MDM",
+      "SCCM Deployment",
+      "SharePoint Cloud & Classification",
+      "Azure Virtual Desktop (AVD)",
+      "CrowdStrike Falcon Endpoint Security",
     ],
   },
   {
-    category: "Automation, Scripting & Dev",
-    iconName: "Terminal",
+    id: "development",
+    category: "Development & Software",
+    subtitle: "Building production web applications and internal tools to solve real IT problems",
+    competencyCount: 12,
     skills: [
-      { name: "PowerShell Scripting", level: "Advanced", experienceYears: "7+ yrs" },
-      { name: "Python (Automation & NetOps)", level: "Intermediate", experienceYears: "5+ yrs" },
-      { name: "PHP & MySQL Web Tools", level: "Intermediate", experienceYears: "6+ yrs" },
-      { name: "Bash & Linux Shell", level: "Intermediate", experienceYears: "5+ yrs" },
-      { name: "Google Apps Script & Sheets API", level: "Advanced", experienceYears: "6+ yrs" },
-      { name: "REST APIs & Webhooks", level: "Intermediate", experienceYears: "4+ yrs" },
-      { name: "HTML5, CSS3 & Tailwind CSS", level: "Intermediate", experienceYears: "5+ yrs" },
-      { name: "Git & GitHub Version Control", level: "Intermediate", experienceYears: "4+ yrs" },
+      "Python",
+      "JavaScript (ES6+)",
+      "TypeScript",
+      "HTML5 & CSS3",
+      "React.js",
+      "Next.js",
+      "Node.js",
+      "REST APIs",
+      "Firebase",
+      "MongoDB",
+      "MySQL & SQL Server",
+      "PHP",
     ],
   },
   {
-    category: "Hardware Diagnostics & Peripherals",
-    iconName: "Wrench",
+    id: "tools",
+    category: "Tools & Automation",
+    subtitle: "Scripting, DevOps, version control, and operational automation pipelines",
+    competencyCount: 8,
     skills: [
-      { name: "Laptop & Desktop Board Diagnostics", level: "Expert", experienceYears: "13 yrs" },
-      { name: "Zebra / Datamax Thermal Printers", level: "Expert", experienceYears: "12+ yrs" },
-      { name: "Industrial PCs & Touch Terminals", level: "Expert", experienceYears: "11+ yrs" },
-      { name: "Biometric Scanners & Door Access", level: "Advanced", experienceYears: "9+ yrs" },
-      { name: "Multi-function Network Printers", level: "Expert", experienceYears: "13 yrs" },
-      { name: "RAM, SSD, Display Replacement", level: "Expert", experienceYears: "13 yrs" },
+      "Git & GitHub",
+      "Docker Basics",
+      "PowerShell Scripting",
+      "Google Apps Script",
+      "Batch & Automation Scripts",
+      "Excel Data Analysis",
+      "Power Apps",
+      "ITIL V3 Foundation",
     ],
   },
 ];
@@ -350,245 +380,351 @@ export const skillCategories: SkillCategory[] = [
 export const projectsList: ProjectItem[] = [
   {
     id: "itam-system",
-    title: "IT Asset Management System (ITAM Suite)",
-    category: "Audit & ITAM",
-    description: "Enterprise web application built to catalog, track, and manage the full lifecycle of enterprise IT hardware, assigned custodians, warranties, and maintenance histories across factory divisions.",
-    problemSolved: "Eliminated manual paper and outdated spreadsheet records that caused frequent asset misplacement and missed warranty deadlines.",
-    architecture: "Lightweight modular architecture with relational database persistence, barcode scan parsing, automated depreciation calculation, and role-based access control.",
-    technologies: ["PHP", "MySQL", "JavaScript", "Tailwind CSS", "HTML5", "Bootstrap"],
-    features: [
-      "Barcode & QR Code asset tag generation and rapid camera/scanner lookup",
-      "Automated straight-line depreciation calculating real-time net book value",
-      "Software license assignment registry preventing compliance over-usage",
-      "User handover sign-off receipts with PDF export capabilities",
-      "Warranty expiration notification engine 60/30/15 days prior",
-    ],
+    title: "IT Asset Management System",
+    badge: "Asset Management",
     status: "In Production",
+    subLabel: "Chaminda Sampath // Toolset",
+    description: "An internal asset management solution designed to improve IT asset tracking, physical reconciliation, automated reporting, and complete lifecycle...",
+    operationalValue: "Eliminated manual spreadsheet discrepancies across thousands of site devices by establishing a centralized relational database with audit logs and barcode verification.",
+    technologies: ["Python", "JavaScript", "REST API", "MySQL", "React"],
     githubUrl: "https://github.com/DCS1990",
     hasPhpSource: true,
   },
   {
     id: "asset-audit-dashboard",
     title: "Asset Audit & Reconciliation Dashboard",
-    category: "Audit & ITAM",
-    description: "Reconciliation engine that ingests physical floor audit scans and compares them against live Active Directory and Microsoft Intune last-seen timestamps to identify dormant, rogue, or missing devices.",
-    problemSolved: "Reduced multi-day audit reconciliation cycles to under 2 hours, discovering discrepancies with 100% accuracy.",
-    architecture: "Python data processing script with a responsive dashboard frontend showing real-time match ratios, department variance metrics, and CSV export for external auditors.",
-    technologies: ["Python", "PowerShell", "PHP", "MySQL", "Chart.js", "Tailwind CSS"],
-    features: [
-      "Automated cross-referencing between physical audit CSVs and AD directory exports",
-      "Variance categorization: 'Missing on Floor', 'Dormant in AD', 'Unregistered Device'",
-      "Audit trail logging with timestamped examiner signatures",
-      "Visual variance graphs breakdown by plant, floor, and department",
-    ],
-    status: "In Production",
+    badge: "Asset Management",
+    status: "Completed",
+    subLabel: "Chaminda Sampath // Toolset",
+    description: "An analytics dashboard for monitoring asset verification status, pinpointing offline devices, categorizing asset aging, and viewing live...",
+    operationalValue: "Allowed IT leadership to instantly see discrepancies between Active Directory / Intune active records and physical floor audit counts.",
+    technologies: ["Python", "Excel Data Analysis", "Interactive Dashboard", "REST API"],
     githubUrl: "https://github.com/DCS1990",
     hasPhpSource: true,
   },
   {
     id: "repair-management-system",
-    title: "IT Hardware Repair & RMA Tracker",
-    category: "Service Operations",
-    description: "Service tracking system logging all damaged laptops, thermal printheads, power supplies, and switch modules dispatched to external authorized service centers.",
-    problemSolved: "Stopped vendor turnaround delays and prevented spare unit pool shortages by introducing transparent status tracking.",
-    architecture: "PHP and MySQL backend with status workflow states (Logged -> Dispatched -> In Repair -> Returned -> QC Passed -> Closed).",
-    technologies: ["PHP", "MySQL", "JavaScript", "Tailwind CSS", "REST API"],
-    features: [
-      "Vendor turnaround time (TAT) analytics benchmarked against agreed SLAs",
-      "Buffer pool availability monitor tracking loaner laptops and spare printers",
-      "Automated email alerts when repairs exceed 7 business days",
-      "Cost-to-repair accumulation ledger for TCO replacement decisions",
-    ],
-    status: "Implemented",
+    title: "IT Repair Management Dashboard",
+    badge: "Asset Management",
+    status: "In Production",
+    subLabel: "Chaminda Sampath // Toolset",
+    description: "An internal operational solution for logging repair requests, tracking vendor inspections, managing quotations, and observing real-time repair progress.",
+    operationalValue: "Streamlined multi-vendor hardware repair workflows, preventing lost warranty units and minimizing printer/workstation downtime.",
+    technologies: ["Next.js", "Node.js", "TypeScript", "Tailwind CSS", "MongoDB"],
     githubUrl: "https://github.com/DCS1990",
     hasPhpSource: true,
   },
   {
-    id: "attendance-sync-tool",
-    title: "Biometric Attendance & Shift Sync Tool",
-    category: "Automation & Tools",
-    description: "Operational sync utility bridging network biometric fingerprint and facial recognition access terminals with manufacturing line attendance databases.",
-    problemSolved: "Resolved sync lag and network dropouts between remote factory gate terminals and HR systems during high-volume shift changes.",
-    architecture: "Python socket service polling terminal SDKs, batching punch transactions, and posting clean records to central database with automatic retry mechanisms.",
-    technologies: ["Python", "PHP", "MySQL", "Socket API", "Bash"],
-    features: [
-      "Real-time terminal connectivity monitor with automatic restart routines",
-      "Duplicate swipe deduplication algorithm handling rapid multi-punches",
-      "Shift-aware transaction routing matching 3 factory working shifts",
-      "Daily email summary sent to factory operational management",
-    ],
-    status: "In Production",
+    id: "attendance-management-system",
+    title: "Attendance Management System",
+    badge: "Web Applications",
+    status: "Completed",
+    subLabel: "Chaminda Sampath // Toolset",
+    description: "A responsive web-based attendance and leave management solution featuring user access control, multi-level approval workflows, and comprehensive...",
+    operationalValue: "Replaced manual paper roster forms with an intuitive web application providing instant supervisor approvals and shift verification.",
+    technologies: ["Next.js", "TypeScript", "Firebase Auth", "MongoDB", "Tailwind CSS"],
     githubUrl: "https://github.com/DCS1990",
     hasPhpSource: true,
   },
   {
-    id: "network-ping-monitor",
-    title: "Automated Endpoint & Switch Ping Monitor",
-    category: "Automation & Tools",
-    description: "Lightweight, resource-efficient background daemon continuously monitoring the reachability of 200+ mission-critical switches, Wi-Fi APs, and manufacturing barcode printers.",
-    problemSolved: "Allowed IT team to detect and resolve network switch and line printer dropouts before plant production supervisors noticed the stoppage.",
-    architecture: "Multithreaded Python daemon with ICMP echo polling and an ultra-fast web status board.",
-    technologies: ["Python", "PowerShell", "Bash", "HTML5", "SMTP"],
-    features: [
-      "Concurrent asynchronous ICMP polling maintaining low CPU overhead",
-      "Instant email and alert webhook triggers upon 3 consecutive lost packets",
-      "Historical uptime percentage calculation per device and per switch stack",
-      "Color-coded web dashboard designed for 24/7 IT NOC wall displays",
-    ],
+    id: "endpoint-switch-monitor",
+    title: "Automated Endpoint & Switch Monitor",
+    badge: "Automation & Tools",
     status: "In Production",
+    subLabel: "Chaminda Sampath // Toolset",
+    description: "A lightweight automated monitoring script that continually polls network switches, factory floor thermal printers, and production terminals,...",
+    operationalValue: "Proactively informed the IT support team of localized network drops before factory floor supervisors logged support tickets.",
+    technologies: ["PowerShell", "Python", "Windows Task Scheduler", "SMTP API"],
     githubUrl: "https://github.com/DCS1990",
     hasPhpSource: false,
   },
   {
-    id: "intune-sync-automation",
-    title: "Microsoft Intune Compliance & Sync Automator",
-    category: "Enterprise Systems",
-    description: "Automated PowerShell suite integrating with Microsoft Graph API to audit device compliance states, escrow BitLocker recovery passwords, and flag outdated OS builds.",
-    problemSolved: "Enforced 100% corporate endpoint security compliance and eliminated missing BitLocker recovery keys during emergency boot failures.",
-    architecture: "Scheduled Azure App Registration script executing daily delta syncs and updating central IT compliance records.",
-    technologies: ["PowerShell", "Microsoft Graph API", "Entra ID", "Intune"],
-    features: [
-      "Automatic BitLocker recovery key backup verification in Azure AD",
-      "Non-compliant endpoint detection with auto-generated remediation instructions",
-      "Device retirement script securely cleaning orphaned cloud objects upon employee exit",
-      "Weekly executive compliance percentage reports generated automatically",
-    ],
-    status: "Enterprise Asset",
+    id: "intune-inventory-sync",
+    title: "Intune & Inventory Sync Automation",
+    badge: "Automation & Tools",
+    status: "Completed",
+    subLabel: "Chaminda Sampath // Toolset",
+    description: "A custom automation script bridging Microsoft Intune device exports with internal site asset databases and Google Sheets for daily operational cross-checks.",
+    operationalValue: "Eliminated 4 hours of weekly manual data entry comparing Intune enrollment with physical inventory tagging numbers.",
+    technologies: ["Google Apps Script", "PowerShell", "Microsoft Graph API", "JSON"],
     githubUrl: "https://github.com/DCS1990",
     hasPhpSource: false,
   },
 ];
 
-export const itamPillars: ItamPillar[] = [
+export const itamSpecializations: ItamSpecialization[] = [
   {
-    number: "01",
-    title: "Lifecycle Management",
-    description: "Complete visibility from requisition, capital approval, procurement, tagging, staging, deployment, re-assignment to responsible recycling.",
-    activities: [
-      "Standardized hardware intake checklists",
-      "MAC address, serial number, and IMEI recording",
-      "Immediate tagging with barcode and tamper-evident labels",
+    id: "lifecycle",
+    title: "Asset Lifecycle Management",
+    description: "Complete oversight from initial procurement and provisioning to deployment, maintenance, and eventual retirement.",
+    iconName: "RefreshCw",
+    tasks: [
+      "Procurement tagging",
+      "Standardized imaging",
+      "Maintenance schedules",
+      "Decommissioning",
     ],
   },
   {
-    number: "02",
-    title: "Physical Verification & Audits",
-    description: "Rigorous quarterly and annual wall-to-wall physical stock inspections verifying device presence, physical state, and custodian verification.",
-    activities: [
-      "Floor-by-floor handheld scanner audits",
-      "Verification of machine serials against AD hostname records",
-      "Discrepancy reconciliation with department heads",
+    id: "verification",
+    title: "Physical Asset Verification",
+    description: "Hands-on site audits validating physical serial numbers against digital inventory records across all production lines.",
+    iconName: "ScanLine",
+    tasks: [
+      "Barcode scanning",
+      "Location verification",
+      "Custodian assignment",
+      "Floor tag checks",
     ],
   },
   {
-    number: "03",
-    title: "Intune & AD Hybrid Reconciliation",
-    description: "Bridging the gap between physical reality and digital discovery by cross-referencing Microsoft Intune telemetry with floor audit scans.",
-    activities: [
-      "Automated discrepancy flags for dormant accounts (>45 days)",
-      "Discovery of unmanaged or shadow IT devices",
-      "Real-time IP and subnet location validation",
+    id: "offline-reconciliation",
+    title: "Offline Asset Reconciliation",
+    description: "Systematic investigation of endpoints inactive on the network to prevent lost, stolen, or misplaced equipment.",
+    iconName: "WifiOff",
+    tasks: [
+      "AD inactive query",
+      "Department sweeps",
+      "Intune sync analysis",
+      "Status classification",
     ],
   },
   {
-    number: "04",
-    title: "Aging & Depreciation Analysis",
-    description: "Tracking asset financial age against enterprise refresh cycles to proactively forecast budget requirements and prevent hardware fatigue.",
-    activities: [
-      "Calculation of net book value and remaining economic life",
-      "Identification of aging machines causing excessive ticket volume",
-      "Data-backed replacement proposals for annual capital budgeting",
+    id: "aging",
+    title: "Asset Aging Analysis",
+    description: "Tracking device age, warranty milestones, and depreciation to plan timely refresh cycles and budget projections.",
+    iconName: "Clock",
+    tasks: [
+      "Depreciation tracking",
+      "Warranty expiration logs",
+      "Refresh forecasting",
+      "Cost-benefit analysis",
     ],
   },
   {
-    number: "05",
-    title: "Secure Decommissioning & E-Waste",
-    description: "Strict adherence to data sanitization standards before asset donation, sale, or disposal according to environmental regulations.",
-    activities: [
-      "DoD 5220.22-M compliant multi-pass hard drive wiping",
-      "Physical storage degaussing or destruction logging",
-      "Signed disposal certificates and environmental vendor manifests",
+    id: "disposal",
+    title: "IT Disposal Process",
+    description: "Secure, environmentally compliant e-waste handling including certified storage media sanitization.",
+    iconName: "Trash2",
+    tasks: [
+      "Secure data wiping",
+      "Certification of destruction",
+      "Hazardous e-waste compliance",
+      "Scrap documentation",
     ],
   },
   {
-    number: "06",
-    title: "Hardware RMA & Vendor Management",
-    description: "Structured custody tracking for enterprise assets leaving the factory premises for warranty repair or specialized component maintenance.",
-    activities: [
-      "Gate pass documentation and vendor dispatch receipts",
-      "SLA turnaround time tracking with escalation triggers",
-      "Return quality inspection prior to re-entering production pool",
+    id: "repair-mgmt",
+    title: "Hardware Repair Management",
+    description: "Supervising internal diagnostics, external vendor RMA dispatches, warranty claims, and turnaround SLAs.",
+    iconName: "Wrench",
+    tasks: [
+      "RMA tracking",
+      "Vendor quotation checks",
+      "Loaner device dispatch",
+      "Quality inspection",
     ],
   },
   {
-    number: "07",
-    title: "Software License Compliance",
-    description: "Preventing costly corporate non-compliance by maintaining strict 1:1 ratios between purchased enterprise licenses and active seats.",
-    activities: [
-      "Microsoft 365 license pruning for exited employees",
-      "CAD / specialized industrial software seat tracking",
-      "Periodic audit readiness reviews simulating vendor audits",
+    id: "licenses",
+    title: "Software License Tracking",
+    description: "Ensuring license compliance, eliminating dormant subscriptions, and monitoring software installations via Intune.",
+    iconName: "ShieldCheck",
+    tasks: [
+      "M365 seat audits",
+      "Installed software reviews",
+      "Compliance validation",
+      "Cost optimization",
     ],
   },
   {
-    number: "08",
-    title: "Spare Parts & Buffer Pool Management",
-    description: "Maintaining an optimal inventory of replacement components, standby laptops, and critical barcode printheads for zero production downtime.",
-    activities: [
-      "Minimum stock level triggers for RAM, SSDs, and thermal heads",
-      "Pre-configured loaner laptop pool ready for under-10-minute dispatch",
-      "Consumable tracking for print ribbons, labels, and patch cables",
+    id: "intune-mgmt",
+    title: "Intune Device Management",
+    description: "Centrally managing endpoint configurations, compliance policies, remote wipes, and software updates.",
+    iconName: "Laptop",
+    tasks: [
+      "Autopilot enrollment",
+      "Configuration profiles",
+      "Conditional access sync",
+      "Remote wipe protocols",
+    ],
+  },
+  {
+    id: "audit-support",
+    title: "IT Audit Support",
+    description: "Preparing audit documentation, asset logs, and reconciliation proofs for internal and external corporate compliance auditors.",
+    iconName: "FileCheck2",
+    tasks: [
+      "Evidence gathering",
+      "Variance justification",
+      "SOP compliance",
+      "Audit walkthroughs",
+    ],
+  },
+  {
+    id: "vendor-coord",
+    title: "Vendor Coordination",
+    description: "Liaising with hardware suppliers, service providers, and finance teams to ensure SLA adherence and fair quotation pricing.",
+    iconName: "Users",
+    tasks: [
+      "Quotation negotiations",
+      "Service level tracking",
+      "Procurement approvals",
+      "Supplier relationship",
+    ],
+  },
+  {
+    id: "reporting",
+    title: "IT Reporting & Dashboards",
+    description: "Transforming raw inventory and ticket data into actionable visual insights for site executives and IT leadership.",
+    iconName: "BarChart3",
+    tasks: [
+      "Uptime KPIs",
+      "Asset health dashboards",
+      "Discrepancy summaries",
+      "Monthly management packs",
     ],
   },
 ];
 
-export const certificationsList: CertificationItem[] = [
+export const automationSolutions: AutomationSolution[] = [
   {
-    id: "degree-kelaniya",
+    id: "recon-engine",
+    title: "Asset Reconciliation Engine",
+    category: "IT Operations",
+    iconName: "FileSpreadsheet",
+    problem: "Discrepancies between physical shop floor computers and Active Directory / Intune cloud registries.",
+    solution: "Developed custom Python scripts to parse CSV exports from Intune and compare against physical inventory logs.",
+    impact: "Cut weekly audit time from 6 hours to 15 minutes while achieving 99.4% record accuracy.",
+    technologies: ["Python", "Pandas", "Excel", "CSV"],
+    statusBadge: "Production Tested",
+  },
+  {
+    id: "ping-sweep",
+    title: "Network Switch & Printer Ping Sweep",
+    category: "Site Monitoring",
+    iconName: "Activity",
+    problem: "Thermal barcode printers and edge switches failing during off shifts without immediate technician notification.",
+    solution: "Deployed a lightweight PowerShell daemon running on a local server checking IP availability every 3 minutes.",
+    impact: "Reduced unannounced production line halts by catching offline peripherals before workers report tickets.",
+    technologies: ["PowerShell", "Windows Service", "SMTP"],
+    statusBadge: "Production Tested",
+  },
+  {
+    id: "repair-portal",
+    title: "Internal IT Repair Portal",
+    category: "Workflow Automation",
+    iconName: "Database",
+    problem: "Equipment sent for external repairs tracked via fragmented paper slips and email threads.",
+    solution: "Created a full stack Next.js tracking dashboard with stages for inspection, quotation approval, and dispatch.",
+    impact: "100% visibility on repair status, eliminating duplicate vendor inquiries and accelerating turnaround by 35%.",
+    technologies: ["Next.js", "TypeScript", "MongoDB", "Tailwind"],
+    statusBadge: "Production Tested",
+  },
+  {
+    id: "intune-crosscheck",
+    title: "Daily Intune Attendance & Asset Cross-Check",
+    category: "Productivity",
+    iconName: "CheckCircle2",
+    problem: "Verifying laptop custodian presence and equipment status across factory departments.",
+    solution: "Built Google Apps Script integrations that fetch device last seen timestamps and map to employee rosters.",
+    impact: "Quickly flags devices that have not connected to corporate Wi-Fi for prolonged periods.",
+    technologies: ["Google Apps Script", "Microsoft Graph", "REST API"],
+    statusBadge: "Production Tested",
+  },
+];
+
+export const educationCertificationsList: EducationCertificationItem[] = [
+  {
+    id: "bbm",
     title: "Bachelor of Business Management (B.BM)",
-    issuer: "University of Kelaniya, Sri Lanka",
-    year: "Graduated",
-    badgeType: "Degree",
-    description: "Comprehensive university education combining business strategy, financial management, organizational operations, and information systems governance.",
+    year: "2015 – 2019",
+    type: "Degree",
+    institution: "University of Kelaniya, Sri Lanka",
+    description: "Focus on operational management, business processes, systems integration, and organizational strategy.",
   },
   {
-    id: "ccna-cisco",
-    title: "CCNA (Cisco Certified Network Associate)",
-    issuer: "Vibernets Academy",
-    year: "Certified Administrator",
-    badgeType: "Certification",
-    description: "Rigorous curriculum covering Cisco IOS configuration, VLAN trunking, OSPF/EIGRP routing, ACL packet filtering, NAT/PAT, and enterprise network troubleshooting.",
+    id: "ccna",
+    title: "CCNA Certification Administrator",
+    year: "2022",
+    type: "Certification",
+    institution: "Vibernets Academy Campus, Malabe",
+    description: "Cisco routing, switching, IP addressing, VLAN configurations, network security, and WAN architectures.",
   },
   {
-    id: "itil-v3",
-    title: "ITIL V3 2011 Foundation in IT Service Management",
-    issuer: "ANC Education / AXELOS",
-    year: "Foundation Certified",
-    badgeType: "Certification",
-    description: "Best practice framework for IT service management (ITSM), incident lifecycle management, change advisory board (CAB) workflows, and SLA fulfillment.",
+    id: "itil",
+    title: "ITIL V3 2011 Foundation",
+    year: "2019",
+    type: "Certification",
+    institution: "ANC Education, Colombo 03",
+    description: "IT service management principles, service lifecycle, incident management, and continuous improvement.",
   },
   {
-    id: "windows-net-admin",
-    title: "Windows Network Administrator Diploma",
-    issuer: "Turnkey IT Campus",
-    year: "Diploma Awarded",
-    badgeType: "Diploma",
-    description: "Advanced hands-on diploma covering Windows Server domain architecture, Active Directory federation, Group Policy design, DNS/DHCP infrastructure, and storage management.",
+    id: "turnkey",
+    title: "Diploma in Windows Network Administrator",
+    year: "2013",
+    type: "Diploma",
+    institution: "Turnkey IT Campus, Colombo 03",
+    description: "Windows Server infrastructure, Active Directory domain services, Group Policy, DNS, and DHCP.",
   },
   {
-    id: "linux-admin",
-    title: "Linux Fundamentals & System Administration",
-    issuer: "University of Colombo (School of Computing)",
-    year: "Professional Certification",
-    badgeType: "Certification",
-    description: "Core Linux operating system administration, kernel fundamentals, shell scripting, package management, service daemons, file permissions, and network daemon security.",
+    id: "colombo-unix",
+    title: "UNIX / Linux Fundamentals, Network and Systems Administration",
+    year: "2013",
+    type: "Certification",
+    institution: "University of Colombo, Sri Lanka",
+    description: "Linux shell scripting, server administration, user permissions, and network services.",
   },
   {
-    id: "naita-it",
-    title: "National Trade Certificate in Information Technology",
-    issuer: "NAITA (National Apprentice & Industrial Training Authority)",
-    year: "National Trade Qualification",
-    badgeType: "Trade Certificate",
-    description: "National vocational certification affirming industrial competence in computer hardware engineering, board-level troubleshooting, peripheral maintenance, and workplace safety standards.",
+    id: "naita",
+    title: "National Trade Certificate of Computer Applications",
+    year: "2009",
+    type: "Diploma",
+    institution: "National Apprentice and Industrial Training Authority (NAITA)",
+    description: "Computer fundamentals, troubleshooting, office automation, and database administration.",
+  },
+  {
+    id: "nac-hdcs",
+    title: "Higher Diploma in Computer Studies",
+    year: "2008",
+    type: "Diploma",
+    institution: "NAC Computer System, Balangoda",
+    description: "System architecture, software development fundamentals, and data structures.",
+  },
+  {
+    id: "nac-graphic",
+    title: "Diploma in Graphic Design and Computer Studies",
+    year: "2007 – 2008",
+    type: "Diploma",
+    institution: "NAC Computer System, Balangoda",
+    description: "Visual communication, digital illustration, and computing workflows.",
+  },
+  {
+    id: "leadership",
+    title: "Certified Leadership Development Program",
+    year: "2008",
+    type: "Certification",
+    institution: "University of Sabaragamuwa, Sri Lanka",
+    description: "Team leadership, conflict management, and workplace communications.",
+  },
+  {
+    id: "al",
+    title: "G.C.E. Advanced Level (Commerce Stream)",
+    year: "2009",
+    type: "School",
+    institution: "National Examinations Department, Sri Lanka",
+    description: "Accounting (A), Economics (B), Business Studies (S).",
+  },
+  {
+    id: "ol",
+    title: "G.C.E. Ordinary Level",
+    year: "2006",
+    type: "School",
+    institution: "Sri Dharmananda Vidyayathana Pirivena, Sri Lanka",
+    description: "Completed standard secondary education certifications.",
   },
 ];
+
+// Re-export backward compatible lists
+export const certificationsList = educationCertificationsList;
+export const focusAreas = coreOperationalFocusAreas;

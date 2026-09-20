@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { personalInfo, experienceList, skillCategories, certificationsList } from '@/src/data/profile';
-import { X, Printer, Download, Mail, Phone, MapPin, Building2, Calendar, CheckCircle2, ShieldCheck, ExternalLink } from 'lucide-react';
+import { personalInfo, experienceList, skillCategories, educationCertificationsList } from '@/src/data/profile';
+import { X, Printer, Mail, Phone, MapPin, Building2, Calendar, CheckCircle2 } from 'lucide-react';
 
 interface CvModalProps {
   isOpen: boolean;
@@ -35,7 +35,7 @@ export function CvModal({ isOpen, onClose }: CvModalProps) {
             <button
               type="button"
               onClick={handlePrint}
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-sky-600 hover:bg-sky-500 text-white shadow-xs transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#1d63ed] hover:bg-blue-700 text-white shadow-xs transition-all cursor-pointer"
             >
               <Printer className="w-3.5 h-3.5" />
               <span>Print / Save as PDF</span>
@@ -61,8 +61,11 @@ export function CvModal({ isOpen, onClose }: CvModalProps) {
                 <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-slate-900 dark:text-white">
                   {personalInfo.name}
                 </h1>
-                <p className="text-sm font-bold text-sky-600 dark:text-sky-400 mt-1">
+                <p className="text-sm font-bold text-[#1d63ed] dark:text-sky-400 mt-1">
                   Senior IT Support Specialist &bull; Infrastructure &bull; Operations &bull; ITAM Lead
+                </p>
+                <p className="text-xs text-slate-500 dark:text-slate-400 font-mono mt-0.5">
+                  {personalInfo.credentialsSubtitle}
                 </p>
               </div>
               <div className="text-right hidden sm:block font-mono text-xs text-slate-500">
@@ -103,12 +106,12 @@ export function CvModal({ isOpen, onClose }: CvModalProps) {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {skillCategories.map((cat) => (
-                <div key={cat.category} className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
+                <div key={cat.id} className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800">
                   <span className="text-xs font-bold text-slate-900 dark:text-white block mb-1">
                     {cat.category}
                   </span>
                   <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-snug">
-                    {cat.skills.map((s) => s.name).join(' &bull; ')}
+                    {cat.skills.join(' • ')}
                   </p>
                 </div>
               ))}
@@ -128,8 +131,8 @@ export function CvModal({ isOpen, onClose }: CvModalProps) {
                       <span className="font-extrabold text-sm sm:text-base text-slate-900 dark:text-white">
                         {exp.role}
                       </span>
-                      <span className="text-xs text-sky-600 dark:text-sky-400 font-bold block sm:inline sm:ml-2">
-                        &bull; {exp.company} ({exp.legalEntity})
+                      <span className="text-xs text-[#1d63ed] dark:text-sky-400 font-bold block sm:inline sm:ml-2">
+                        &bull; {exp.company}
                       </span>
                     </div>
                     <span className="text-xs font-mono font-bold text-slate-500 dark:text-slate-400">
@@ -137,15 +140,24 @@ export function CvModal({ isOpen, onClose }: CvModalProps) {
                     </span>
                   </div>
 
-                  <p className="text-xs text-slate-500 dark:text-slate-400 italic">
-                    {exp.companyDescription}
-                  </p>
+                  <div className="text-xs text-slate-500 dark:text-slate-400 flex items-center gap-1">
+                    <MapPin className="w-3 h-3 text-slate-400" />
+                    <span>{exp.location}</span>
+                  </div>
 
-                  <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 pl-4 list-disc">
+                  <ul className="space-y-1.5 text-xs text-slate-700 dark:text-slate-300 pl-4 list-disc pt-1">
                     {exp.responsibilities.map((r, i) => (
                       <li key={i} className="leading-relaxed">{r}</li>
                     ))}
                   </ul>
+
+                  <div className="flex flex-wrap gap-1 pt-1">
+                    {exp.technologies.map((t) => (
+                      <span key={t} className="px-2 py-0.5 rounded text-[10px] font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                        {t}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               ))}
             </div>
@@ -157,13 +169,16 @@ export function CvModal({ isOpen, onClose }: CvModalProps) {
               Education &amp; Industry Credentials
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {certificationsList.map((cert) => (
+              {educationCertificationsList.map((cert) => (
                 <div key={cert.id} className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40">
-                  <span className="text-xs font-bold text-slate-900 dark:text-white block">
-                    {cert.title}
-                  </span>
-                  <span className="text-[11px] text-sky-600 dark:text-sky-400 font-bold block">
-                    {cert.issuer}
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-xs font-bold text-slate-900 dark:text-white block">
+                      {cert.title}
+                    </span>
+                    <span className="text-[10px] font-mono text-slate-400">{cert.year}</span>
+                  </div>
+                  <span className="text-[11px] text-[#1d63ed] dark:text-sky-400 font-bold block">
+                    {cert.institution}
                   </span>
                   <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
                     {cert.description}

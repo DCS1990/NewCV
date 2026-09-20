@@ -3,25 +3,16 @@
 import React, { useState } from 'react';
 import { personalInfo } from '@/src/data/profile';
 import {
-  FolderKanban,
-  FileText,
-  Mail,
-  MessageSquare,
-  MapPin,
-  Linkedin,
-  Github,
+  ArrowRight,
+  Download,
   CheckCircle2,
-  Code2,
-  Phone,
-  Server,
-  ShieldCheck,
-  Award,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  FileText,
   Copy,
-  Check,
-  ExternalLink,
-  Laptop,
-  Cpu,
-  Boxes
+  Check
 } from 'lucide-react';
 
 interface HeroProps {
@@ -38,228 +29,227 @@ export function Hero({ onOpenCvModal }: HeroProps) {
   };
 
   return (
-    <section id="hero" className="relative overflow-hidden pt-12 pb-16 md:pt-20 md:pb-24 border-b border-slate-200 dark:border-slate-800/80 transition-colors duration-200 bg-gradient-to-b from-white via-slate-50/50 to-slate-100/30 dark:from-slate-950 dark:via-slate-900/40 dark:to-slate-950">
-      
-      {/* Subtle Background Ambience using clean Tailwind utility patterns */}
-      <div className="absolute inset-0 pointer-events-none opacity-40 dark:opacity-20 bg-[radial-gradient(#0284c7_1px,transparent_1px)] [background-size:24px_24px]"></div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+    <section id="home" className="relative pt-8 pb-16 md:pt-12 md:pb-20 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        {/* Main 2-Column Hero Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           
-          {/* Main Column */}
-          <div className="lg:col-span-8 space-y-7">
-            {/* Status & Credential Pills */}
-            <div className="flex flex-wrap items-center gap-2.5">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 shadow-2xs">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span>Active Enterprise Plant IT Operations &bull; Balangoda</span>
-              </div>
-
-              <div className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-sky-50 dark:bg-sky-950/70 text-sky-800 dark:text-sky-300 border border-sky-200 dark:border-sky-800 shadow-2xs">
-                <ShieldCheck className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
-                <span>MAS Capital &amp; Brandix Enterprise Track Record</span>
-              </div>
+          {/* Left Column: Bio, Credentials & Actions */}
+          <div className="lg:col-span-7 space-y-6">
+            
+            {/* Top Status Pill */}
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white/90 dark:bg-slate-900/90 text-slate-700 dark:text-slate-300 border border-blue-200/90 dark:border-blue-900/70 shadow-2xs">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+              <span>Open to senior IT Support, Infrastructure &amp; Asset Management Opportunities</span>
             </div>
 
-            {/* Main Headline & Identity */}
-            <div className="space-y-3">
-              <div className="flex items-center gap-3 flex-wrap">
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1]">
-                  {personalInfo.name}
-                </h1>
-              </div>
-              <p className="text-base sm:text-xl font-bold text-sky-600 dark:text-sky-400 tracking-tight">
-                Senior IT Support Specialist &bull; Infrastructure &bull; Operations &bull; ITAM Lead
+            {/* Big Headline */}
+            <div>
+              <h1 className="text-4xl sm:text-5xl lg:text-[58px] font-black tracking-tight text-slate-950 dark:text-white leading-[1.08]">
+                {personalInfo.name}
+              </h1>
+              
+              {/* Electric Blue Subtitle */}
+              <h2 className="text-lg sm:text-xl lg:text-2xl font-extrabold text-[#1d63ed] dark:text-sky-400 mt-2 tracking-tight">
+                {personalInfo.roleTitle}
+              </h2>
+
+              {/* Monospace Subtitle */}
+              <p className="text-xs sm:text-sm font-mono text-slate-500 dark:text-slate-400 mt-1.5">
+                {personalInfo.credentialsSubtitle}
               </p>
             </div>
 
-            {/* Executive Summary */}
-            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed font-normal">
-              Senior technical specialist with <span className="font-semibold text-slate-900 dark:text-white">13+ years</span> of progressive enterprise engineering across Sri Lanka&apos;s apex manufacturing giants (<span className="font-semibold text-slate-900 dark:text-white">MAS Capital</span> &amp; <span className="font-semibold text-slate-900 dark:text-white">Brandix</span>). Specializing in plant infrastructure resilience, L1/L2 executive computing, Cisco LAN/WAN networks, Microsoft Intune endpoint governance, 11+ years of IT Asset Management (ITAM), and custom operational automation in Python, PowerShell, and PHP.
+            {/* Paragraph Bio */}
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl font-normal">
+              {personalInfo.heroBio}
             </p>
 
-            {/* Call to Actions (Tailwind High-Contrast Buttons) */}
+            {/* 4 Checkmarks (2x2 Grid) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+              {personalInfo.heroChecks.map((check, idx) => (
+                <div key={idx} className="flex items-center gap-2.5 text-xs sm:text-sm font-medium text-slate-700 dark:text-slate-200">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0" />
+                  <span>{check}</span>
+                </div>
+              ))}
+            </div>
+
+            {/* Action Buttons Row */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
+              <a
+                href="#projects"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-[#1d63ed] hover:bg-blue-700 text-white font-bold text-sm shadow-md shadow-blue-600/20 transition-all cursor-pointer active:scale-98"
+              >
+                <span>View My Work</span>
+                <ArrowRight className="w-4 h-4" />
+              </a>
+
               <button
-                id="hero-cv-cta"
                 type="button"
                 onClick={onOpenCvModal}
-                className="px-5 py-3 rounded-xl text-xs sm:text-sm font-bold bg-sky-600 hover:bg-sky-500 text-white shadow-md shadow-sky-600/20 transition-all flex items-center gap-2.5 active:scale-[0.98] cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-white font-bold text-sm border border-slate-300 dark:border-slate-700 shadow-2xs transition-all cursor-pointer active:scale-98"
               >
-                <FileText className="w-4 h-4" />
-                <span>View &amp; Download Executive CV</span>
+                <Download className="w-4 h-4 text-[#1d63ed]" />
+                <span>Download CV</span>
               </button>
 
-              <a
-                id="hero-projects-cta"
-                href="#projects"
-                className="px-5 py-3 rounded-xl text-xs sm:text-sm font-bold bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 shadow-xs transition-all flex items-center gap-2.5 active:scale-[0.98]"
+              <button
+                type="button"
+                onClick={onOpenCvModal}
+                className="text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white underline underline-offset-4 ml-1 cursor-pointer"
               >
-                <FolderKanban className="w-4 h-4 text-sky-600 dark:text-sky-400" />
-                <span>Applied Projects</span>
-              </a>
-
-              <a
-                id="hero-php-cta"
-                href="#php-project"
-                className="px-5 py-3 rounded-xl text-xs sm:text-sm font-bold bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition-all flex items-center gap-2.5 active:scale-[0.98]"
-              >
-                <Code2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
-                <span>PHP 8+ Project Hub</span>
-              </a>
+                View / Print CV
+              </button>
             </div>
 
-            {/* Contact Badges & Instant Copy Tool */}
-            <div className="pt-4 flex flex-wrap items-center gap-4 text-xs font-medium text-slate-600 dark:text-slate-400 border-t border-slate-200 dark:border-slate-800/80">
-              <div className="inline-flex items-center gap-1.5">
-                <a
-                  href={`mailto:${personalInfo.email}`}
-                  className="hover:text-sky-600 dark:hover:text-sky-400 transition-colors font-mono"
-                >
-                  <Mail className="w-3.5 h-3.5 text-sky-500 inline mr-1.5" />
-                  <span>{personalInfo.email}</span>
-                </a>
-                <button
-                  type="button"
-                  onClick={handleCopyEmail}
-                  className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors"
-                  title="Copy email to clipboard"
-                >
-                  {copiedEmail ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
-                </button>
-              </div>
-
-              <a
-                href={personalInfo.whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors font-mono"
-              >
-                <MessageSquare className="w-3.5 h-3.5 text-emerald-500" />
-                <span>WhatsApp: {personalInfo.whatsapp}</span>
-              </a>
-
-              <span className="inline-flex items-center gap-1.5 text-slate-500 dark:text-slate-400">
-                <MapPin className="w-3.5 h-3.5 text-amber-500" />
-                <span>{personalInfo.location}</span>
-              </span>
-            </div>
-          </div>
-
-          {/* Profile Card / Metrics Bento Column */}
-          <div className="lg:col-span-4">
-            <div className="bg-white dark:bg-slate-900/90 rounded-2xl p-6 sm:p-7 border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none space-y-6 backdrop-blur-xs">
-              
-              {/* Profile Monogram & Verified Header */}
-              <div className="flex items-center gap-4">
-                <div className="relative">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-sky-600 via-blue-600 to-indigo-700 text-white flex items-center justify-center font-black text-2xl shadow-md tracking-wider">
-                    CS
-                  </div>
-                  <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900 flex items-center justify-center text-white" title="Verified Professional">
-                    <Check className="w-3 h-3" />
-                  </span>
-                </div>
-                <div>
-                  <h3 className="font-bold text-slate-900 dark:text-white text-lg leading-snug">
-                    {personalInfo.name}
-                  </h3>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
-                    MAS Active Trading IT Specialist
-                  </p>
-                  <div className="inline-flex items-center gap-1.5 mt-1.5 px-2.5 py-0.5 rounded text-[11px] font-bold bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
-                    <span>13+ Years Service</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Verified KPI Grid */}
-              <div className="grid grid-cols-2 gap-3 pt-1">
-                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800/80 hover:border-sky-300 dark:hover:border-sky-800 transition-colors">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-sky-600 dark:text-sky-400 block font-mono">
-                    {personalInfo.yearsExperience}+
-                  </span>
-                  <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                    Years Enterprise IT
-                  </span>
-                </div>
-
-                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800/80 hover:border-sky-300 dark:hover:border-sky-800 transition-colors">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-sky-600 dark:text-sky-400 block font-mono">
-                    {personalInfo.endpointsManaged}
-                  </span>
-                  <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                    Fleet Endpoints
-                  </span>
-                </div>
-
-                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800/80 hover:border-sky-300 dark:hover:border-sky-800 transition-colors">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 block font-mono">
-                    {personalInfo.slaAdherence}
-                  </span>
-                  <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                    Incident SLA Rate
-                  </span>
-                </div>
-
-                <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-100 dark:border-slate-800/80 hover:border-sky-300 dark:hover:border-sky-800 transition-colors">
-                  <span className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 block font-mono">
-                    11+ Yrs
-                  </span>
-                  <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
-                    ITAM Audits
-                  </span>
-                </div>
-              </div>
-
-              {/* Core Facility Badges */}
-              <div className="pt-1">
-                <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 block mb-2">
-                  Key Production Footprint
+            {/* Horizontal Divider */}
+            <div className="border-t border-slate-300/80 dark:border-slate-800 pt-4">
+              <div className="flex flex-wrap items-center gap-y-2 gap-x-4 text-xs text-slate-600 dark:text-slate-400">
+                <span className="font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                  CONNECT DIRECTLY:
                 </span>
-                <div className="flex flex-wrap gap-1.5">
-                  <span className="px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
-                    MAS Active Trading
-                  </span>
-                  <span className="px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
-                    Brandix Apparel Group
-                  </span>
-                  <span className="px-2.5 py-1 rounded-md text-xs font-semibold bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 border border-slate-200 dark:border-slate-700">
-                    Dream Curious (UAE)
-                  </span>
-                </div>
-              </div>
-
-              {/* External Profile Links */}
-              <div className="pt-2 flex items-center gap-2">
-                <a
-                  href={personalInfo.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 transition-colors"
-                >
-                  <Linkedin className="w-4 h-4 text-sky-600" />
-                  <span>LinkedIn Profile</span>
-                </a>
 
                 <a
                   href={personalInfo.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex-1 inline-flex items-center justify-center gap-2 py-2.5 px-3 rounded-xl text-xs font-bold bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 transition-colors"
+                  className="inline-flex items-center gap-1.5 hover:text-[#1d63ed] transition-colors"
                 >
-                  <Github className="w-4 h-4 text-slate-800 dark:text-slate-200" />
-                  <span>GitHub Code</span>
+                  <Github className="w-3.5 h-3.5" />
+                  <span>GitHub</span>
                 </a>
+
+                <a
+                  href={personalInfo.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 hover:text-[#1d63ed] transition-colors"
+                >
+                  <Linkedin className="w-3.5 h-3.5" />
+                  <span>LinkedIn</span>
+                </a>
+
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  className="inline-flex items-center gap-1.5 hover:text-[#1d63ed] transition-colors cursor-pointer"
+                  title="Click to copy email"
+                >
+                  <Mail className="w-3.5 h-3.5 text-sky-500" />
+                  <span className="font-mono">{personalInfo.email}</span>
+                  {copiedEmail && <span className="text-[10px] text-emerald-500 font-bold">(copied)</span>}
+                </button>
+
+                <span className="inline-flex items-center gap-1.5">
+                  <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                  <span>{personalInfo.location}</span>
+                </span>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Right Column: Floating Profile Card */}
+          <div className="lg:col-span-5 flex justify-center">
+            <div className="w-full max-w-md bg-white dark:bg-[#0f172a] rounded-3xl p-3 sm:p-4 shadow-xl border border-blue-100 dark:border-slate-800">
+              
+              {/* Photo Frame */}
+              <div className="relative rounded-2xl overflow-hidden aspect-4/5 bg-slate-100 dark:bg-slate-800 border border-slate-200/60 dark:border-slate-700">
+                
+                {/* Visual Representation of Professional Portrait */}
+                <div className="absolute inset-0 bg-linear-to-b from-sky-50 via-slate-100 to-slate-200 dark:from-slate-800 dark:to-slate-900 flex flex-col items-center justify-center p-6 text-center">
+                  
+                  {/* Executive Avatar Graphic */}
+                  <div className="relative mb-4">
+                    <div className="w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-linear-to-tr from-slate-800 via-blue-900 to-sky-700 p-1 shadow-lg flex items-center justify-center">
+                      <div className="w-full h-full rounded-full bg-slate-900 flex flex-col items-center justify-center text-white overflow-hidden relative">
+                        {/* Suit and Tie silhouette */}
+                        <div className="text-3xl sm:text-4xl font-black tracking-wider text-sky-400">
+                          CS
+                        </div>
+                        <span className="text-[10px] font-mono text-slate-400 mt-1 uppercase tracking-widest">
+                          CHAMINDA
+                        </span>
+                      </div>
+                    </div>
+                    <span className="absolute bottom-1 right-1 w-5 h-5 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-900"></span>
+                  </div>
+
+                  <h3 className="font-extrabold text-slate-900 dark:text-white text-base sm:text-lg">
+                    Chaminda Sampath
+                  </h3>
+                  <p className="text-xs text-[#1d63ed] dark:text-sky-400 font-semibold mt-0.5">
+                    Senior Enterprise IT Support Specialist
+                  </p>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 max-w-xs mt-2 leading-relaxed">
+                    13+ Years high-velocity apparel plant IT operations, ITAM asset lifecycle &amp; Intune governance.
+                  </p>
+                </div>
+
+                {/* Dark Bottom Bar Overlay */}
+                <div className="absolute bottom-0 inset-x-0 bg-slate-950/90 backdrop-blur-md px-4 py-3 border-t border-slate-800 flex items-center justify-between text-left">
+                  <div>
+                    <span className="text-xs sm:text-sm font-extrabold text-white block">
+                      MAS Capital (Pvt) Ltd
+                    </span>
+                    <span className="text-[11px] text-slate-400 block font-medium">
+                      IT Support Specialist (L1)
+                    </span>
+                  </div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-400 border border-emerald-500/40">
+                    CURRENT ROLE
+                  </span>
+                </div>
+              </div>
+
+              {/* Bottom 2 Info Boxes */}
+              <div className="grid grid-cols-2 gap-2.5 mt-3">
+                <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 text-center">
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">
+                    Education
+                  </span>
+                  <span className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white block mt-0.5">
+                    B.BM (Kelaniya)
+                  </span>
+                </div>
+
+                <div className="p-3 rounded-xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 text-center">
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium block">
+                    Certifications
+                  </span>
+                  <span className="text-xs sm:text-sm font-extrabold text-slate-900 dark:text-white block mt-0.5">
+                    CCNA &amp; ITIL V3
+                  </span>
+                </div>
               </div>
 
             </div>
           </div>
 
         </div>
+
+        {/* Bottom 4 KPI Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-12 sm:mt-16">
+          {personalInfo.kpis.map((kpi, idx) => (
+            <div
+              key={idx}
+              className="bg-white dark:bg-[#0f172a] rounded-2xl p-6 border border-blue-100 dark:border-slate-800 shadow-sm"
+            >
+              <span className="text-3xl sm:text-4xl font-black text-[#1d63ed] dark:text-sky-400 block tracking-tight">
+                {kpi.number}
+              </span>
+              <span className="font-extrabold text-slate-900 dark:text-white text-sm block mt-1.5">
+                {kpi.title}
+              </span>
+              <span className="text-xs text-slate-500 dark:text-slate-400 block mt-1 leading-relaxed">
+                {kpi.subtitle}
+              </span>
+            </div>
+          ))}
+        </div>
+
       </div>
     </section>
   );
