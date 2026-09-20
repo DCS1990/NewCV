@@ -1,0 +1,27 @@
+# Apache Configuration for Chaminda Sampath Portfolio
+# Security & Performance settings
+
+# Prevent directory browsing
+Options -Indexes
+
+# UTF-8 encoding
+AddDefaultCharset UTF-8
+
+# Protect sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Security Headers
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# Gzip compression for static assets
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
